@@ -1,0 +1,67 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> 
+  <div class="container">
+    <a class="navbar-brand" href="#">Pet Finder</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/userdogs">Dogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/usercats">Cats</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+ </nav>  -->
+<div>
+  <h1 class="text-center" class="custom-text">Finde Your Perfect Pet From Other Sellers</h1>
+</div>
+ <div class="hero-section"> 
+ <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-3 text-center">
+      <div class="icon-box">
+        <i class="fa-solid fa-dog"></i>
+        <img src="/assets/dog-pet.jpg" alt="Dogs" class="icon-image">
+        <a class="nav-link" routerLink="/userdogs">Dogs</a>
+      </div>
+      
+    </div>
+    <div class="col-md-3 text-center">
+      <div class="icon-box">
+        <i class="fa-solid fa-cat"></i>
+        <img src="/assets/cat.jpg" alt="Cats" class="icon-image">
+        <a class="nav-link" routerLink="/usercats">Cats</a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+    <div class="row">
+      <div class="col-md-2-4 mb-4" *ngFor="let pet of paginatedPets">
+        <div class="card" (click)="viewPetDetails(pet.id)">
+          <img [src]="'http://localhost:8081'+pet.imagePath" class="card-img-top" alt="Pet Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ pet.name }}</h5>
+            <p class="card-text"><strong>Age:</strong> {{ pet.age }} years</p>
+            <p class="card-text"><strong>Breed:</strong> {{ pet.breed }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+  <!-- Pagination Controls -->
+  <div class="pagination-controls">
+    <button
+      *ngFor="let page of totalPagesArray"
+      (click)="changePage(page)"
+      [class.active]="page === currentPage"
+    >
+      {{ page }}
+    </button>
+  </div>
+  </div>
+</div> 
+  

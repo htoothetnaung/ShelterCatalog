@@ -1,0 +1,34 @@
+
+<div *ngIf="pet" class="container mt-4 d-flex justify-content-center">
+    <div class="row pet-details-card">
+      <div class="col-md-4">
+        <img [src]="'http://localhost:8081' + pet.imagePath" class="img-fluid custom-img" alt="Pet Image"><br><br>
+        <!-- <button class="button-85" role="button" [routerLink]="['/adoption-form', petId]">Foster Me</button> -->
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ pet.name }}</h5><br>
+          <p class="card-text"><i class="fa-solid fa-info-circle"></i> <strong>Description:</strong> {{ pet.description }}</p><br>
+          <div class="card-details d-flex">
+            <p class="card-text"><i class="fa-solid fa-paw"></i> <strong>Age:</strong> {{ pet.age }} years</p>
+            <p class="card-text"><i class="fa-solid fa-paw"></i> <strong>Breed:</strong> {{ pet.breed }}</p>
+          </div>
+          <br>
+          <div class="card-details d-flex">
+            <p class="card-text"><i class="fa-solid fa-paw"></i> <strong>Size:</strong> {{ pet.size }}</p>
+            <p class="card-text"><i class="fa-solid fa-paw"></i> <strong>Gender:</strong> {{ pet.gender }}</p>
+          </div>
+          <br>
+          <div class="card-details d-flex">
+            <p class="card-text"><i class="fa-solid fa-paw"></i> <strong>Color:</strong> {{ pet.color }}</p>
+            <p class="card-text"><i class="fa-solid fa-paw"></i> <strong>Contact Info:</strong> {{ pet.contactInfo }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Previous Link -->
+  <div class="text-center mt-3">
+    <a class="btn btn-primary" (click)="goToPreviousPage()">Previous</a>
+  </div>

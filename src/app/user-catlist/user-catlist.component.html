@@ -1,0 +1,101 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+
+<div class="hero-section d-flex  align-items-center">
+  <h1 class="text-center" class="custom-text">You can make a difference <br>in their lives</h1>
+</div>
+<br>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <h4 class="mb-4 text-center">
+      <i class="fa-solid fa-cat"></i>Find Your Perfect Pets</h4>
+  </div>
+
+  <!-- Add .row to the form or wrap your columns in a .row inside the form -->
+  <form (ngSubmit)="applyFilters()" class="p-4 border rounded shadow-sm bg-light">
+
+    <!-- Row for the first two inputs -->
+    <div class="row mb-3">
+      <div class="col-md-2">
+        <label for="breed" class="form-label">Breed</label>
+        <input
+          type="text"
+          [(ngModel)]="filters.breed"
+          name="breed"
+          class="form-control"
+          id="breed"
+          placeholder="Enter breed"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="size" class="form-label">Size</label>
+        <select [(ngModel)]="filters.size" name="size" class="form-select" id="size">
+          <option *ngFor="let s of sizes" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="age" class="form-label">Age</label>
+        <input
+          type="number"
+          [(ngModel)]="filters.age"
+          name="age"
+          class="form-control"
+          id="age"
+          placeholder="Enter age"
+        />
+      </div>
+      <div class="col-md-2">
+        <label for="gender" class="form-label">Gender</label>
+        <select [(ngModel)]="filters.gender" name="gender" class="form-select" id="gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="color" class="form-label">Color</label>
+        <input 
+          type="text" 
+          [(ngModel)]="filters.color" 
+          name="color" 
+          class="form-control" 
+          id="color" 
+          list="colorOptions"
+          placeholder="Enter or select color"
+        />
+        <datalist id="colorOptions">
+          <option *ngFor="let color of catColors" [value]="color"></option>
+        </datalist>
+      </div>
+      
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+      </div>
+      
+    </div>
+
+    
+
+
+    <div class="col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-lg-2 col-md-4 col-sm-6 col-12 mb-3" *ngFor="let cat of cats">
+          <div class="card pet-card" (click)="viewPetDetails(cat.id)">
+            <img [src]="'http://localhost:8081'+cat.imagePath" class="card-img-top" alt="Cat Image">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ cat.name }}</h5>
+              <p class="card-text"><strong>Age:</strong> {{ cat.age }} years</p>
+              <p class="card-text"><strong>Breed:</strong> {{ cat.breed }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+      <!-- Previous Link -->
+      <div class="text-center mt-3">
+        <a class="btn btn-primary" (click)="goToPreviousPage()">Previous</a>
+      </div>
+    
+    

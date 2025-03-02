@@ -1,0 +1,66 @@
+<div class="hero-section d-flex  align-items-center">
+
+  <h1 class="text-center" class="custom-text">Adopt Lives,<br> Faster Happiness</h1>
+  <!-- Add this button anywhere in your HTML -->
+
+</div>
+<br>
+
+<div>
+  <h1 class="text-center" class="custom-text">Pets For Sale At Our Adoption Home</h1>
+</div>
+
+
+ <div class="container" >
+  <div class="row justify-content-center">
+    <div class="col-md-3 text-center">
+      <div class="icon-box">
+        <i class="fa-solid fa-dog"></i>
+        <img src="/assets/dog-pet.jpg" alt="Dogs" class="icon-image">
+        <a class="nav-link" [routerLink]="['/dogs']">Dogs</a>
+      </div>
+      
+    </div>
+    <div class="col-md-3 text-center">
+      <div class="icon-box">
+        <i class="fa-solid fa-cat"></i>
+        <img src="/assets/cat.jpg" alt="Cats" class="icon-image">
+        <a class="nav-link" [routerLink]="['/cats']">Cats</a>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-2-4 mb-4" *ngFor="let pet of paginatedPets">
+      <div class="card" (click)="viewPetDetails(pet.id)">
+        <img [src]="'http://localhost:8081/uploads/' + pet.imageUrl" class="card-img-top" alt="Pet Image">
+        <div class="card-body">
+          <h5 class="card-title">{{ pet.name }}</h5>
+          <p class="card-text"><strong>Age:</strong> {{ pet.age }} years</p>
+          <p class="card-text"><strong>Breed:</strong> {{ pet.breed }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Pagination Controls -->
+<div class="pagination-controls">
+  <button
+    *ngFor="let page of totalPagesArray"
+    (click)="changePage(page)"
+    [class.active]="page === currentPage"
+  >
+    {{ page }}
+  </button>
+</div>
+</div>
+<br>
+<br>
+<div><app-user-petlist></app-user-petlist></div>
+
+<button class="btn btn-primary btn-outline-light" (click)="goToUserProfile()">Go to User Profile</button>

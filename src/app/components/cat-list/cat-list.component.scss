@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap'); /* Example similar font */
+
+.hero-section {
+  height: 100vh; // Full viewport height
+  background-color: #f0f0f0; // Light grey background, replace with your desired color or image
+  background-image: url("/assets/white-cat.jpg"); // Uncomment and replace with your image path
+  background-size: cover;
+  background-position: center;
+
+  h1 {
+    font-size: 3rem;
+    color: #333; // Dark grey color for text
+    font-weight: bold;
+    line-height: 1.2;
+  }
+}
+
+.custom-text {
+  color: pink;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Chewy', cursive; 
+  text-align: center; /* Align text to the left */
+  margin-left: 35px; /* Move text 30px from the left margin */
+  
+  
+  font-weight: bold;
+}
+
+
+form {
+  font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+  border: 2px solid #000; /* Make form border darker */
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.form-control,
+.form-select {
+  border: 2px solid #000; /* Make filter fields' borders darker */
+}
+
+h4 {
+  color: skyblue; /* Change text color to sky blue */
+  font-family: 'Chewy', cursive; 
+}
+
+button.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+
+/* Remove margin around the frames */
+.card {
+  margin: 0;
+}
+
+/* Custom text styles */
+.card-title {
+  font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+  font-size: 1.5rem; /* Make name's font size bigger */
+}
+
+.card-text {
+  font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+  font-size: 1rem;
+}
+
+/* Add icons in front of the text */
+.card-text strong {
+  margin-right: 5px;
+}
+
+.card-text i {
+  margin-right: 5px;
+}
+
+
+.pet-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer; // Shows it's clickable
+
+  &:hover {
+    transform: scale(1.05); // Slightly enlarges the card
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); // Adds depth
+    background-color: rgba(0, 0, 0, 0.05); // Light background change
+  }
+}
+
+
+/* Ensure images inside cards are uniform */
+.card-img-top {
+  transition: transform 0.3s ease; /* Smooth transition for image */
+  width: 100%; /* Make images fill the card width */
+  height: 200px; /* Set a fixed height */
+  object-fit: cover; /* Ensure images fit without stretching */
+  border-radius: 10px; /* Optional: add rounded corners */
+}

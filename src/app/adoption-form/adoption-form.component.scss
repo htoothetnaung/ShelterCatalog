@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap'); /* Example similar font */
+.registration-form-container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: gray;
+}
+
+.error {
+    color: red;
+    font-size: 0.8rem;
+}

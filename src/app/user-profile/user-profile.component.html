@@ -1,0 +1,322 @@
+<div class="profile">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">Welcome, {{username}}</span>
+
+      <div class="flex-grow-1"></div>
+
+      <form class="d-flex">
+<!-- Add this button anywhere in your HTML -->
+<button class="btn btn-secondary btn-outline-light mx-3" (click)="goToPetList()">Go to Pet List</button>
+        <input class="form-control me-2" type="search" name="searchQuery" [(ngModel)]="searchQuery"
+          (input)="searchPosts()" placeholder="Search..." aria-label="Search">
+        <button class="btn btn-outline-light me-2" style="width:150px" type="button" data-bs-toggle="modal"
+          data-bs-target="#addPostModal">Add Post</button>
+        <button class="btn btn-primary" type="button" (click)="logout()">Logout</button>
+      </form>
+    </div>
+  </nav>
+  <div class="container mt-5 shadow-container">
+    <div class="row d-flex flex-wrap">
+      <div *ngFor="let post of filteredPosts" class="col-md-4 mb-5">
+        <div class="card shadow-lg"
+          style="box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); border-radius: 10px;background-color: #fff; ">
+          <div style="background-color: aliceblue;">
+            <img [src]="getImageUrl(post)" class="card-img-top mt-3 mb-3 fixed-img"
+              alt="Pet Image">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <h2>{{ post.name }}</h2>
+            </h5>
+            <p class="card-text"><strong>Age:</strong> {{ post?.age }} Years</p>
+            <p class="card-text"><strong>Breed:</strong> {{ post?.breed }}</p>
+            <button class="btn btn-success me-2" type="button" data-bs-toggle="modal" data-bs-target="#updatePostModal"
+              (click)="openUpdate(post)">Update</button>
+            <button class="btn btn-primary me-2" type="button" data-bs-toggle="modal" data-bs-target="#detailsPostModal"
+              (click)="showDetails(post)">Details</button>
+            <button class="btn btn-danger me-2" type="button" data-bs-toggle="modal" data-bs-target="#deletePostModal"
+              (click)="selectedPost = post">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modals -->
+  <div class="modal fade" id="addPostModal" tabindex="-1" aria-labelledby="addPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header " style="background-color: #243B55; color:#fff">
+          <h5 class="modal-title" id="addPostModalLabel">Add a new post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" >
+
+          <form (submit)="submitPost()" enctype="multipart/form-data">
+            <div class="row">
+              <!-- Type Selection -->
+              <div class="col-md-4 mb-3">
+                <label for="name" class="form-label">Pet Name</label>
+                <input type="text" [(ngModel)]="post.name" name="name" class="form-control" required />
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="type" class="form-label">Type</label>
+                <select [(ngModel)]="post.type" name="type" class="form-select" required (change)="onTypeChange()">
+                  <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+                </select>
+              </div>
+
+              <!-- Breed Selection -->
+              <div class="col-md-4 mb-3">
+                <label for="breed" class="form-label">Breed</label>
+                <select [(ngModel)]="post.breed" name="breed" class="form-select" required>
+                  <option *ngFor="let b of filteredBreeds" [value]="b">{{ b }}</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+              <!-- Age -->
+              <div class="col-md-4 mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" [(ngModel)]="post.age" name="age" class="form-control" required min="0" max="60" />
+              </div>
+
+              <!-- Size -->
+              <div class="col-md-4 mb-3">
+                <label for="size" class="form-label">Size</label>
+                <select [(ngModel)]="post.size" name="size" class="form-select" required>
+                  <option *ngFor="let s of sizes" [value]="s">{{ s }}</option>
+                </select>
+              </div>
+
+              <!-- Gender -->
+              <div class="col-md-4 mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select [(ngModel)]="post.gender" name="gender" class="form-select" required>
+                  <option *ngFor="let g of genders" [value]="g">{{ g }}</option>
+                </select>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <!-- Color -->
+              <div class="col-md-4 mb-3">
+                <label for="color" class="form-label">Color</label>
+                <input type="text" [(ngModel)]="post.color" name="color" class="form-control" required />
+              </div>
+              <!-- Price -->
+              <div class="col-md-4 mb-3">
+                <label for="price" class="form-label">Price 💸</label>
+                <input type="number" [(ngModel)]="post.price" name="price" class="form-control" required min="0" />
+              </div>
+            
+            </div>
+              
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label for="contactInfo" class="form-label">Contact Info </label>
+              <textarea [(ngModel)]="post.contactInfo" name="contactInfo" class="form-control" rows="3"
+                placeholder="Write a short Contact Info ..." required></textarea>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label for="description" class="form-label">About <strong>{{ post.name }}</strong></label>
+              <textarea [(ngModel)]="post.description" name="description" class="form-control" rows="3"
+                placeholder="Write a short description..." required></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+              <label for="image" class="form-label">Upload Image</label>
+              <input type="file" (change)="onFileSelected($event)" class="form-control" />
+            </div>
+
+
+            <div *ngIf="successMessage" class="alert alert-success ">
+              {{ successMessage }}
+            </div>
+            <div class="modal-footer" >
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Post</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updatePostModal" tabindex="-1" aria-labelledby="updatePostModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #243B55; color:#fff">
+          <h5 class="modal-title" id="updatePostModalLabel">Update post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="selectedPost">
+
+          <form (submit)="updatePost()" enctype="multipart/form-data">
+            <div class="row">
+              <!-- Type Selection -->
+              <div class="col-md-4 mb-3">
+                <label for="name" class="form-label">Pet Name</label>
+                <input type="text" [(ngModel)]="selectedPost.name" name="name" class="form-control" required />
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="type" class="form-label">Type</label>
+                <select [(ngModel)]="selectedPost.type" name="type" class="form-select" required (change)="onTypeChange()">
+                  <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+                </select>
+              </div>
+
+              <!-- Breed Selection -->
+              <div class="col-md-4 mb-3">
+                <label for="breed" class="form-label">Breed</label>
+                <select [(ngModel)]="selectedPost.breed" name="breed" class="form-select" required>
+                  <option *ngFor="let b of filteredBreeds" [value]="b">{{ b }}</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="row">
+
+              <!-- Age -->
+              <div class="col-md-4 mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" [(ngModel)]="selectedPost.age" name="age" class="form-control" required min="0" max="60" />
+              </div>
+
+              <!-- Size -->
+              <div class="col-md-4 mb-3">
+                <label for="size" class="form-label">Size</label>
+                <select [(ngModel)]="selectedPost.size" name="size" class="form-select" required>
+                  <option *ngFor="let s of sizes" [value]="s">{{ s }}</option>
+                </select>
+              </div>
+
+              <!-- Gender -->
+              <div class="col-md-4 mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select [(ngModel)]="selectedPost.gender" name="gender" class="form-select" required>
+                  <option *ngFor="let g of genders" [value]="g">{{ g }}</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="row">
+              <!-- Color -->
+              <div class="col-md-4 mb-3">
+                <label for="color" class="form-label">Color</label>
+                <input type="text" [(ngModel)]="selectedPost.color" name="color" class="form-control" required />
+              </div>
+              <!-- Price -->
+              <div class="col-md-4 mb-3">
+                <label for="price" class="form-label">Price 💸</label>
+                <input type="number" [(ngModel)]="selectedPost.price" name="price" class="form-control" required min="0" />
+              </div>
+            
+            </div>
+
+            <div class="mb-3">
+              <label for="contactInfo" class="form-label">Contact Info</label>
+              <textarea [(ngModel)]="selectedPost.contactInfo" name="contactInfo" class="form-control" rows="2"
+                required></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">About {{selectedPost.name}}</label>
+              <textarea [(ngModel)]="selectedPost.description" name="description" class="form-control" rows="3"
+                required></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+              <label for="image" class="form-label">Upload Image</label>
+              <input type="file" (change)="onFileChanged($event)" class="form-control" />
+            </div>
+            <div *ngIf="successMessage" class="alert alert-success ">
+              {{ successMessage }}
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="detailsPostModal" tabindex="-1" aria-labelledby="detailsPostModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #243B55; color:#fff">
+          <h5 class="modal-title" id="detailsPostModalLabel"><i class="bi bi-info-circle"></i> Pet Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="selectedPost">
+
+          <div class="text-center">
+            <img [src]="'http://localhost:8081' + selectedPost?.imagePath"
+              class="img-fluid rounded shadow-sm mb-3 fixed-img" alt="Pet Image">
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p><strong>Name:</strong> {{ selectedPost?.name }}
+              </p>
+              <p> <strong>Age:</strong> {{ selectedPost?.age }} Years
+              </p>
+              <p> <strong>Breed:</strong> {{ selectedPost?.breed }}</p>
+              <p><strong>Size:</strong> {{ selectedPost?.size }}</p>
+            </div>
+            <div class="col-md-6">
+              <p><strong>Gender:</strong> {{ selectedPost?.gender }}
+              </p>
+              <p> <strong>Color:</strong> {{ selectedPost?.color }}</p>
+              <p> <strong>Price:</strong> ${{ selectedPost?.price }}</p>
+              <p> <strong>Contact:</strong> {{ selectedPost?.contactInfo }}
+              </p>
+            </div>
+            <div class="alert alert-light border mt-3">
+              <p><i class="bi bi-chat-left-text-fill text-dark"></i> <strong>About:</strong> {{ selectedPost?.description }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #243B55; color:#fff">
+          <h5 class="modal-title" id="deletePostModalLabel">Delete Post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete the post "<strong>{{ selectedPost?.name }}</strong>"?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" (click)="confirmDelete()" data-bs-dismiss="modal">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

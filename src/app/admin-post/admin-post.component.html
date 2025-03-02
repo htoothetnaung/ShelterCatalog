@@ -1,0 +1,208 @@
+<div class="wrapper">
+  <aside id="sidebar" class="js-sidebar" [ngClass]="{'collapsed': isCollapsed}">
+    <!-- Content For Sidebar -->
+    <div class="h-100">
+      <div class="sidebar-logo">
+        <img src="assets/logo.png" style="width:50px;height:50px">
+        <a routerLink="/dashboard" class="text-white">PawX</a>
+      </div>
+      <ul class="sidebar-nav">
+        <li class="sidebar-header">
+          Admin Features
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" routerLink="/dashboard">
+            <i class='bx bxs-dashboard icon'></i>
+            Dashboard
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" routerLink="/users">
+            <i class='bx bxs-user icon'></i>
+            Manage Users
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
+            aria-expanded="false">
+            <i class='bx bxs-file-find icon'></i>
+            Adoption Request
+          </a>
+          <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item">
+              <a href="#" class="sidebar-link sm-margin-link" routerLink="/adoption_request">
+                <i class='bx bxs-receipt icon'></i>
+                Request
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="#" class="sidebar-link sm-margin-link" routerLink="/adoption_history">
+                <i class='bx bx-history icon'></i>
+                Adoption History
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" routerLink="/adminPost">
+            <i class='bx bx-upload icon'></i>
+            Manage Posts
+          </a>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <div class="main">
+    <nav class="navbar navbar-expand px-3 border-bottom top-0 shadow p-3">
+      <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse navbar">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+              <img src="assets/admin.jpg" class="avatar img-fluid rounded" alt="">
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a href="#" class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="container mt-4">
+
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="searchQuery" (keyup)="filterPosts()" class="serachbar"
+          placeholder="Search posts..." />
+        <button class="myBtn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Post</button>
+      </div>
+
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Info</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+              <form (submit)="submitPost()" enctype="multipart/form-data">
+                <div class="row">
+                  <!-- Type Selection -->
+                  <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Pet Name</label>
+                    <input type="text" [(ngModel)]="post.name" name="name" class="form-control" required />
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="type" class="form-label">Type</label>
+                    <select [(ngModel)]="post.type" name="type" class="form-select" required (change)="onTypeChange()">
+                      <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+                    </select>
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <!-- Breed Selection -->
+                  <div class="col-md-6 mb-3">
+                    <label for="breed" class="form-label">Breed</label>
+                    <select [(ngModel)]="post.breed" name="breed" class="form-select" required>
+                      <option *ngFor="let b of filteredBreeds" [value]="b">{{ b }}</option>
+                    </select>
+                  </div>
+                  <!-- Age -->
+                  <div class="col-md-6 mb-3">
+                    <label for="age" class="form-label">Age</label>
+                    <input type="number" [(ngModel)]="post.age" name="age" class="form-control" required min="0"
+                      max="60" />
+                  </div>
+
+
+                </div>
+
+                <div class="row">
+                  <!-- Size -->
+                  <div class="col-md-6 mb-3">
+                    <label for="size" class="form-label">Size</label>
+                    <select [(ngModel)]="post.size" name="size" class="form-select" required>
+                      <option *ngFor="let s of sizes" [value]="s">{{ s }}</option>
+                    </select>
+                  </div>
+                  <!-- Gender -->
+                  <div class="col-md-6 mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select [(ngModel)]="post.gender" name="gender" class="form-select" required>
+                      <option *ngFor="let g of genders" [value]="g">{{ g }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <!-- Color -->
+                  <div class="col-md-6 mb-3">
+                    <label for="color" class="form-label">Color</label>
+                    <input type="text" [(ngModel)]="post.color" name="color" class="form-control" required />
+                  </div>
+                  <!-- Price -->
+                  <div class="col-md-6 mb-3">
+                    <label for="price" class="form-label">Price 💸</label>
+                    <input type="number" [(ngModel)]="post.price" name="price" class="form-control" required min="0" />
+                  </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                  <label for="description" class="form-label">About <strong>{{ post.name }}</strong></label>
+                  <textarea [(ngModel)]="post.description" name="description" class="form-control" rows="4"
+                    placeholder="Write a short description..." required></textarea>
+                </div>
+
+
+                <!-- Image Upload -->
+                <div class="mb-3">
+                  <label for="image" class="form-label">Upload Image</label>
+                  <input type="file" (change)="onFileSelected($event)" class="form-control" />
+                </div>
+                <div *ngIf="successMessage" class="alert alert-success ">
+                  {{ successMessage }}
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Add Post</button>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="myContainer">
+
+      <h1 class="heading">Meet Our Adorable Pets!</h1>
+
+      <div class="box-container">
+
+        <div class="box" *ngFor="let post of filteredPosts" (click)="viewPost(post)">
+          <img [src]="getImageUrl(post)" alt="Post Image" />
+          <h3>{{ post.name }}</h3>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+</div>

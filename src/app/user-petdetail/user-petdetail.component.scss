@@ -1,0 +1,66 @@
+/* Set background image for the body */
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap'); /* Example similar font */
+// body {
+//     background-image: url("/assets/detail-background.jpg"); /* Add your background image */
+//     background-size: cover; /* Cover the entire page */
+//     background-position: center; /* Center the background image */
+//     background-attachment: fixed; /* Fix the background while scrolling */
+//     margin: 0;
+//     padding: 0;
+//     font-family: Arial, sans-serif;
+//   }
+  
+  /* Container for the pet details card */
+  .pet-details-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* 3D shadow effect */
+    transform: perspective(1000px) rotateY(5deg); /* 3D rotation */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+    margin: 20px auto; /* Center the card */
+    max-width: 800px; /* Limit card width */
+  }
+  
+  /* Hover effect for 3D card */
+  .pet-details-card:hover {
+    transform: perspective(1000px) rotateY(0deg); /* Reset rotation on hover */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+  }
+  
+  /* Style for the pet image */
+  .custom-img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Style for the Foster Me button */
+  .button-85 {
+    background-color: #ff6f61; /* Coral color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-85:hover {
+    background-color: #ff4a3d; /* Darker coral on hover */
+  }
+  
+  /* Style for the card details */
+  .card-details {
+    gap: 20px; /* Space between details */
+  }
+  
+  /* Style for the paw icons */
+  .fa-paw {
+    color: #ff6f61; /* Coral color */
+    margin-right: 10px;
+  }
+
+.container {
+  font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+}

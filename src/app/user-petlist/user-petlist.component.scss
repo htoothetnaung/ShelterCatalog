@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap'); /* Example similar font */
+
+$purple-color: #564787;
+// .hero-section {
+//   height: 100vh; // Full viewport height
+//   background-color: #f0f0f0; // Light grey background, replace with your desired color or image
+//   background-image: url("/assets/cat-glass.jpeg"); // Uncomment and replace with your image path
+//   background-size: cover;
+//   background-position: center;
+
+//   h1 {
+//     font-size: 3rem;
+//     color: #333; // Dark grey color for text
+//     font-weight: bold;
+//     line-height: 1.2;
+//   }
+// }
+
+.custom-text {
+  color: lightblue;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Chewy', cursive; 
+  text-align: center; /* Align text to the left */
+  margin-left: 35px; /* Move text 30px from the left margin */
+  
+  
+  font-weight: bold;
+}
+
+
+form {
+  font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+  border: 2px solid #000; /* Make form border darker */
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.form-control,
+.form-select {
+  border: 2px solid #000; /* Make filter fields' borders darker */
+}
+
+h4 {
+  color: pink; /* Change text color to sky blue */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for effect */
+}
+
+button.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+
+/* Remove margin around the frames */
+.card {
+  margin: 0;
+}
+
+/* Custom text styles */
+.card-title {
+  font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+  font-size: 1.5rem; /* Make name's font size bigger */
+}
+
+.card-text {
+  font-family: 'Chewy', cursive; /* Change font to a similar font to Hobo */
+  font-size: 1rem;
+}
+
+/* Add icons in front of the text */
+.card-text strong {
+  margin-right: 5px;
+}
+
+.card-text i {
+  margin-right: 5px;
+}
+
+.col-md-2-4 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+@media (max-width: 768px) {
+  .col-md-2-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 576px) {
+  .col-md-2-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.icon-box {
+  padding: 20px;
+  border-radius: 8px;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  display: inline-block;
+  position: relative;
+
+  i {
+    font-size: 50px;
+    color: $purple-color;
+  }
+
+  h5 {
+    margin-top: 50px;
+    font-size: 18px;
+    color: #101935;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  &:hover {
+    border-color: $purple-color;
+    cursor: pointer;
+  }
+}
+
+.icon-box {
+  margin-bottom: 20px;
+}
+
+.icon-box i {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.icon-image {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.icon-box a {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 18px;
+}
+
+.icon-box a:hover {
+  color: #007bff; /* Optional: Change color on hover */
+}
+
+.top-image {
+  width: 100%;
+  text-align: center; /* Center the image horizontally */
+   /* Add spacing between the image and the container */
+}
+
+.top-image img {
+  max-width: 100%; /* Ensure the image is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.smaller-image {
+  width: 20%; /* Adjust this value to make the image smaller or larger */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 300px; /* Optional: Set a maximum width */
+}
+
+.image-text {
+  position: absolute; /* Position the text over the image */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
+   /* Text color */
+  text-align: center; /* Center text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow for better readability */
+}
+.image-text p {
+  font-size: 1.2rem; /* Adjust paragraph text size */
+  color:blue;
+}
+
+/* Hover effect on cards */
+.card {
+  margin: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly increase size */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+.card-title {
+  font-family: 'Chewy', cursive;
+  font-size: 1.5rem;
+}
+
+.card-text {
+  font-family: 'Chewy', cursive;
+  font-size: 1rem;
+}
+
+.card-img-top {
+  transition: transform 0.3s ease; /* Smooth transition for image */
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.1); /* Slight zoom effect on image */
+}
+
+//pagination
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #28a745;  /* Change color on hover */
+    }
+
+    &.active {
+      color: black;  /* Green text color */
+      font-weight: bold;
+      background-color: #007bff;  /* Blue background when active */
+      border-radius: 5px;  /* Optional: rounded corners for active button */
+    }
+  }
+}

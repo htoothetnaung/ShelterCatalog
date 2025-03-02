@@ -1,0 +1,182 @@
+<div class="wrapper">
+    <aside id="sidebar" class="js-sidebar" [ngClass]="{'collapsed': isCollapsed}">
+        <!-- Content For Sidebar -->
+        <div class="h-100">
+            <div class="sidebar-logo">
+                <img src="assets/logo.png" style="width:50px;height:50px">
+                <a routerLink="/dashboard" class="text-white">PawX</a>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-header">
+                    Admin Features
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" routerLink="/dashboard">
+                        <i class='bx bxs-dashboard icon'></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" routerLink="/users">
+                        <i class='bx bxs-user icon'></i>
+                        Manage Users
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
+                        aria-expanded="false">
+                        <i class='bx bxs-file-find icon'></i>
+                        Adoption Request
+                    </a>
+                    <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link sm-margin-link" routerLink="/adoption_request">
+                                <i class='bx bxs-receipt icon'></i>
+                                Request
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link sm-margin-link" routerLink="/adoption_history">
+                                <i class='bx bx-history icon'></i>
+                                Adoption History
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" routerLink="/post">
+                        <i class='bx bx-upload icon'></i>
+                        Manage Posts
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="main">
+        <nav class="navbar navbar-expand px-3 border-bottom  top-0 shadow p-3">
+            <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                            <img src="assets/admin.jpg" class="avatar img-fluid rounded" alt="">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="#" class="dropdown-item" (click)="logout()">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container mt-4">
+            <div class="card" *ngIf="user; else noUser">
+                <div class="card-header">
+                    <h2>{{user.username}}</h2>
+                </div>
+                <div class="card-body d-flex align-items-center">
+                    <!-- User Image -->
+                    <div class="profile-image">
+                        <img src='assets/user.jpg' alt="User Image" class="img-fluid rounded-circle">
+                    </div>
+
+                    <!-- User Info -->
+                    <div class="user-info ms-4">
+                        <p><strong>Id:</strong> {{ user.id }}</p>
+                        <p><strong>Name:</strong> {{ user.username }}</p>
+                        <p><strong>Email:</strong> {{ user.email }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-3" *ngIf="posts.length > 0">
+                <div class="card-header">
+                    <h3>Posts</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3" *ngFor="let post of posts">
+                            <div class="card post-card" (click)="viewPostDetails(post)" data-bs-toggle="modal"
+                                data-bs-target="#postModal">
+                                <img [src]="getImageUrl(post.imagePath)" class="card-img-top post-image"
+                                    alt="Post Image">
+                                <div class="card-body d-flex align-items-center justify-content-center">
+                                    <h5 class="card-title text-center">{{ post.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <ng-template #noUser>
+                <div class="container mt-4">
+                    <div class="card" >
+                        <div class="card-header">
+                            <h2>User not found.</h2>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #noPosts>
+                <div class="container mt-4">
+                    <div class="card" >
+                        <div class="card-header">
+                            <h2> No posts available.</h2>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="postModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="postModalLabel">{{ postToView?.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <!-- Image with fixed size -->
+                <div class="image-container">
+                    <img [src]="getImageUrl(postToView?.imagePath)" class="img-fluid">
+                </div>
+
+                <!-- Two-section text layout -->
+                <div class="post-details mt-3">
+                    <div class="left-section">
+                        <p><strong>Type:</strong> {{ postToView?.type }}</p>
+                        <p><strong>Breed:</strong> {{ postToView?.breed }}</p>
+                        <p><strong>Age:</strong> {{ postToView?.age }} years</p>
+                        <p><strong>Size:</strong> {{ postToView?.size }}</p>
+                    </div>
+                    <div class="right-section">
+                        <p><strong>Gender:</strong> {{ postToView?.gender }}</p>
+                        <p><strong>Color:</strong> {{ postToView?.color }}</p>
+                        <p><strong>Price:</strong> ${{ postToView?.price }}</p>
+                        <p><strong>Contact:</strong> {{ postToView?.contactInfo }}</p>
+                    </div>
+                </div>
+                <div class="mt-3 text-start">
+                    <p><strong>Description:</strong> {{ postToView?.description }}</p>
+                </div>
+                <!-- Full-width description -->
+                <div class="mt-3 text-start">
+                    <p><strong>Posted on:</strong> {{ postToView?.createdAt }}</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-lg" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
