@@ -8,3 +8,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes)]
 };
+
+export default defineRoutes([
+  { path: 'pet/:id', renderMode: 'ssr' },
+  { path: 'adoption-form/:id', renderMode: 'ssr' },
+  { path: 'userProfile/:id', renderMode: 'ssr' }
+]);
+
+function defineRoutes(arg0: { path: string; renderMode: string; }[]) {
+  throw new Error('Function not implemented.');
+}
+
