@@ -1,12 +1,14 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "dist/petfinder-catanddog",
+  "outputDirectory": "dist/petfinder-catanddog/browser",
   "routes": [
-    { "src": "/browser/(.*)", "dest": "/browser/$1" },
     { "handle": "filesystem" },
-    { "src": "/assets/(.*)", "dest": "/browser/assets/$1" },
-    { "src": "/(.*).(js|css|ico|jpg|jpeg|png|gif|svg)", "dest": "/browser/$1.$2" },
-    { "src": "/(.*)", "dest": "/browser/index.html" }
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/(.*).(js|css|ico|jpg|jpeg|png|gif|svg)", "dest": "/$1.$2" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
