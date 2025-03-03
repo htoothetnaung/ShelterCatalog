@@ -26,6 +26,8 @@ import { AdoptionRequestComponent } from './adoption-request/adoption-request.co
 import { AdoptionHistoryComponent } from './adoption-history/adoption-history.component';
 import { AdminPostDetailComponent } from './admin-post-detail/admin-post-detail.component';
 import { AdminUserProfileComponent } from './admin-user-profile/admin-user-profile.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+
 
 export const routes: Routes = [
   { path: 'petlist', component: PetListComponent },
@@ -53,6 +55,7 @@ export const routes: Routes = [
     { path: 'adoption_history', component: AdoptionHistoryComponent , canActivate: [AuthGuard]},
   {path: 'adminPostDetails/:id', component: AdminPostDetailComponent, canActivate: [AuthGuard]},
 
+  {path: '**', component: ErrorPageComponent},
   {path: 'adminUserProfile/:id', component: AdminUserProfileComponent, canActivate: [AuthGuard]}
 ];
 
