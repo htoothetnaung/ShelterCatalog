@@ -1,6 +1,5 @@
 export const environment = {
-  production: false,
-  backend1Url: 'http://localhost:8081',
-  backend2Url: 'http://localhost:8082/api/pets',
-  // backend3rul: 'http://localhost:8082/api/applications'
+  production: true,
+  backend1Url: 'https://catalogback-production.up.railway.app',
+  backend2Url: 'https://catalogback-production.up.railway.app/api/pets',
 };
