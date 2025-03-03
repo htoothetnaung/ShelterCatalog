@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "dist/petfinder-catanddog/browser/**",
+        "use": "@vercel/static"
+      },
+      {
+        "src": "dist/petfinder-catanddog/server/main.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "dist/petfinder-catanddog/server/main.js" }
+    ]
+  }
+  
