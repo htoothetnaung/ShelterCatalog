@@ -1,9 +1,10 @@
 {
   "name": "petfinder-login-app",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "ts-node src/server.ts",
+    "start": "ts-node --esm src/server.ts",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
