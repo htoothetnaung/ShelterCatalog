@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "npx ng build --configuration production",
+    "start": "node server.js",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^19.1.0",
     "@angular/cdk": "^19.1.4",
@@ -23,6 +22,7 @@
     "@angular/router": "^19.1.6",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",
+    "express": "^4.21.2",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
