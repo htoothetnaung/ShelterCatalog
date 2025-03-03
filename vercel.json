@@ -1,17 +1,11 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "dist/petfinder-catanddog/browser/**",
-        "use": "@vercel/static"
-      },
-      {
-        "src": "dist/petfinder-catanddog/server/main.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      { "src": "/(.*)", "dest": "dist/petfinder-catanddog/server/main.js" }
-    ]
-  }
-  
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/petfinder-login-app/browser",
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
+    { "src": "/(.*).(js|css|ico|jpg|jpeg|png|gif|svg)", "dest": "/$1.$2" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
