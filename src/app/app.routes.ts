@@ -37,7 +37,7 @@ export const routes: Routes = [
   { path: 'userpet/:id', component: UserPetdetailComponent },
   { path: 'userdogs', component: UserDoglistComponent },
   { path: 'usercats', component: UserCatlistComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/petlist', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
 

@@ -59,4 +59,9 @@ export class PetListComponent implements OnInit {
   goToUserProfile() {
     this.router.navigate(['/userProfile']);
   }
+
+
+  goToLoginPage(){
+    this.router.navigate(['/login']);
+  }
 }
