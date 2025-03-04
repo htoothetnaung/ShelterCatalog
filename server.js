@@ -29,7 +29,7 @@ let staticPath;
 try {
   // For Vercel deployment
   if (process.env.VERCEL) {
-    staticPath = path.join(__dirname, 'dist/petfinder-cats/browser');
+    staticPath = path.join(__dirname, 'dist/petfinder-catanddog/browser');
   } 
   // For Railway deployment
   else if (fs.existsSync('/app/dist')) {
@@ -37,7 +37,7 @@ try {
   } 
   // Local development
   else {
-    staticPath = path.join(__dirname, 'dist/petfinder-cats/browser');
+    staticPath = path.join(__dirname, 'dist/petfinder-cats/browser/');
   }
   
   console.log(`Using static path: ${staticPath}`);
