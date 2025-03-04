@@ -2,26 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/petfinder-catanddog/browser/browser/**",
-      "use": "@vercel/static"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "buildCommand": "npm install -g @angular/cli && npm install && ng build --configuration=production"
+      }
     }
   ],
   "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/dist/petfinder-catanddog/browser/assets/$1"
-    },
-    {
-      "src": "/(.*).(js|css|ico|json|png|jpg|jpeg|svg)",
-      "dest": "/dist/petfinder-catanddog/browser/$1.$2"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
-    }
+    { "src": "/(.*)", "dest": "/dist/petfinder-catanddog/browser/index.html" }
   ]
 }
