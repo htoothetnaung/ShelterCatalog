@@ -6,18 +6,18 @@
       "use": "@vercel/node"
     },
     {
-      "src": "dist/petfinder-cats/browser/**",
+      "src": "dist/petfinder-catanddog/browser/browser/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/assets/(.*)",
-      "dest": "/dist/petfinder-cats/browser/assets/$1"
+      "dest": "/dist/petfinder-catanddog/browser/assets/$1"
     },
     {
       "src": "/(.*).(js|css|ico|json|png|jpg|jpeg|svg)",
-      "dest": "/dist/petfinder-cats/browser/$1.$2"
+      "dest": "/dist/petfinder-catanddog/browser/$1.$2"
     },
     {
       "src": "/(.*)",
