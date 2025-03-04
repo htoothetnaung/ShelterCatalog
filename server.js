@@ -12,46 +12,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Check possible build paths
-const possiblePaths = [
-  path.join(__dirname, 'dist/petfinder-catanddog/browser'),
-  path.join(__dirname, 'dist/petfinder-catanddog'),
-  path.join(__dirname, 'dist'),
-  path.join(__dirname, 'browser')
-];
-
-let staticPath = null;
-
-// Find the first valid path
-for (const pathToCheck of possiblePaths) {
-  try {
-    if (fs.existsSync(pathToCheck) && fs.existsSync(path.join(pathToCheck, 'index.html'))) {
-      staticPath = pathToCheck;
-      console.log(`Found valid build path: ${staticPath}`);
-      break;
-    }
-  } catch (err) {
-    console.log(`Error checking path ${pathToCheck}: ${err.message}`);
-  }
-}
-
-if (!staticPath) {
-  console.error('No valid build path found. Available directories:');
-  try {
-    const rootFiles = fs.readdirSync(__dirname);
-    console.log(`Files in root: ${rootFiles.join(', ')}`);
-    
-    if (rootFiles.includes('dist')) {
-      const distFiles = fs.readdirSync(path.join(__dirname, 'dist'));
-      console.log(`Files in dist: ${distFiles.join(', ')}`);
-    }
-  } catch (err) {
-    console.error(`Error listing directories: ${err.message}`);
-  }
-  
-  // Default to a path even if not found
-  staticPath = path.join(__dirname, 'dist');
-}
+// The correct path based on your folder structure
+const staticPath = path.join(__dirname, 'dist/petfinder-cats/browser');
+console.log(`Serving static files from: ${staticPath}`);
 
 // Serve static files
 app.use(express.static(staticPath));
@@ -71,5 +34,4 @@ app.all('/*', (req, res) => {
 const port = process.env.PORT || 4200;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
-  console.log(`Application available at http://localhost:${port}`);
 });
