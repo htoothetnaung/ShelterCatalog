@@ -1,14 +1,27 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/petfinder-catanddog/browser",
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/(.*).(js|css|ico|jpg|jpeg|png|gif|svg)", "dest": "/$1.$2" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/petfinder-cats/browser/**",
+      "use": "@vercel/static"
+    }
   ],
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/petfinder-cats/browser/assets/$1"
+    },
+    {
+      "src": "/(.*).(js|css|ico|json|png|jpg|jpeg|svg)",
+      "dest": "/dist/petfinder-cats/browser/$1.$2"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    }
   ]
 }
