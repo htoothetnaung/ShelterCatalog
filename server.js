@@ -12,24 +12,45 @@ app.use((req, res, next) => {
   next();
 });
 
-// Log all requests for debugging
-app.use((req, res, next) => {
-  console.log(`Request: ${req.method} ${req.url}`);
-  next();
-});
+// Check possible build paths
+const possiblePaths = [
+  path.join(__dirname, 'dist/petfinder-catanddog/browser'),
+  path.join(__dirname, 'dist/petfinder-catanddog'),
+  path.join(__dirname, 'dist'),
+  path.join(__dirname, 'browser')
+];
 
-// Check if the build directory exists
-const staticPath = path.join(__dirname, 'dist/petfinder-catanddog/browser');
-try {
-  if (fs.existsSync(staticPath)) {
-    console.log(`Static directory exists at: ${staticPath}`);
-    const files = fs.readdirSync(staticPath);
-    console.log(`Files in directory: ${files.join(', ')}`);
-  } else {
-    console.error(`Static directory does not exist: ${staticPath}`);
+let staticPath = null;
+
+// Find the first valid path
+for (const pathToCheck of possiblePaths) {
+  try {
+    if (fs.existsSync(pathToCheck) && fs.existsSync(path.join(pathToCheck, 'index.html'))) {
+      staticPath = pathToCheck;
+      console.log(`Found valid build path: ${staticPath}`);
+      break;
+    }
+  } catch (err) {
+    console.log(`Error checking path ${pathToCheck}: ${err.message}`);
   }
-} catch (err) {
-  console.error(`Error checking static directory: ${err.message}`);
+}
+
+if (!staticPath) {
+  console.error('No valid build path found. Available directories:');
+  try {
+    const rootFiles = fs.readdirSync(__dirname);
+    console.log(`Files in root: ${rootFiles.join(', ')}`);
+    
+    if (rootFiles.includes('dist')) {
+      const distFiles = fs.readdirSync(path.join(__dirname, 'dist'));
+      console.log(`Files in dist: ${distFiles.join(', ')}`);
+    }
+  } catch (err) {
+    console.error(`Error listing directories: ${err.message}`);
+  }
+  
+  // Default to a path even if not found
+  staticPath = path.join(__dirname, 'dist');
 }
 
 // Serve static files
@@ -37,20 +58,13 @@ app.use(express.static(staticPath));
 
 // Handle all routes
 app.all('/*', (req, res) => {
-  const indexPath = path.join(__dirname, 'dist/petfinder-catanddog/browser/index.html');
+  const indexPath = path.join(staticPath, 'index.html');
   console.log(`Serving index.html for route: ${req.url}`);
   
-  // Check if index.html exists
   if (fs.existsSync(indexPath)) {
-    res.sendFile(indexPath, err => {
-      if (err) {
-        console.error(`Error serving index.html: ${err.message}`);
-        res.status(500).send('Error loading application');
-      }
-    });
+    res.sendFile(indexPath);
   } else {
-    console.error(`index.html not found at: ${indexPath}`);
-    res.status(404).send('Application files not found. Build may be missing.');
+    res.status(404).send(`Application files not found. Build may be missing. Checked path: ${staticPath}`);
   }
 });
 
