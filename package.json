@@ -7,6 +7,30 @@
     "start": "ng serve",
     "test": "ng test"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@angular/cli": "^19.2.1",
+    "@angular/common": "^19.2.1",
+    "@angular/compiler": "^19.2.1",
+    "@angular/core": "^19.2.1",
+    "@angular/forms": "^19.2.1",
+    "@angular/material": "^19.2.2",
+    "@angular/platform-browser": "^19.2.1",
+    "@angular/platform-browser-dynamic": "^19.2.1",
+    "@angular/platform-server": "^19.2.1",
+    "@angular/router": "^19.2.1",
+    "@angular/ssr": "^19.2.1",
+    "bootstrap": "^5.3.3",
+    "crypto-js": "^4.2.0",
+    "jwt-decode": "^4.0.0",
+    "rxjs": "^7.8.2",
+    "tslib": "^2.8.1",
+    "zone.js": "^0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.1",
+    "@angular/animations": "^19.2.1",
+    "@angular/compiler-cli": "^19.2.1",
+    "@types/crypto-js": "^4.2.2",
+    "typescript": "^5.8.2"
+  }
 }

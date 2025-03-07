@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap'); /* Example similar font */
+/* Import local font instead of Google Fonts to fix CSS inlining issue */
+@import '../../../assets/fonts/chewy.css';
 
 .hero-section {
   height: 100vh; // Full viewport height
