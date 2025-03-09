@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserPostService {
-  private baseUrl = 'http://localhost:8081/api/userPosts'; 
-  private apiUrl = 'http://localhost:8081/api/userPosts/getPostsByUser';
+  private baseUrl = `${environment.backend1Url}/api/userPosts`; 
+  private apiUrl = `${environment.backend1Url}/api/userPosts/getPostsByUser`;
 
   constructor(private http: HttpClient) {}
 

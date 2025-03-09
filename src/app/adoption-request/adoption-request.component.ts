@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AdoptionRequestsService } from '../service/adoption-requests.service';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-adoption-request',
@@ -81,7 +82,7 @@ export class AdoptionRequestComponent implements OnInit {
       rejectionReason: this.rejectionReason
     };
 
-    this.http.post(`http://localhost:8081/api/applicationForm/reject/${this.selectedRequestId}`, requestBody, { responseType: 'text' })
+    this.http.post(`${environment.backend1Url}/api/applicationForm/reject/${this.selectedRequestId}`, requestBody, { responseType: 'text' })
       .subscribe({
         next: (response) => {
           alert("Rejection email sent and application deleted successfully.");

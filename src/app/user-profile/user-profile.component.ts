@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserPostService } from '../service/user-post.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -259,7 +260,7 @@ export class UserProfileComponent implements OnInit {
     if (!post?.imagePath) {
       return 'assets/default-image.jpg';
     }
-    return `http://localhost:8081${post.imagePath}`;
+    return `${environment.backend1Url}${post.imagePath}`;
   }
   
 

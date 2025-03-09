@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-admin-login',
@@ -20,10 +21,10 @@ export class AdminLoginComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   login() {
-  
-    this.http.post('http://localhost:8081/api/admin/login', {
+
+    this.http.post(`${environment.backend1Url}/api/admin/login`, {
       username: this.username,
-      password: this.password  
+      password: this.password
     }).subscribe(
       (response: any) => {
         localStorage.setItem('authToken', response.token);
@@ -38,4 +39,4 @@ export class AdminLoginComponent {
   goToUserLogin(){
     this.router.navigate(['/login']);
   }
-}  
+}

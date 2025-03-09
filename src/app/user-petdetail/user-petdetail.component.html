@@ -1,5 +1,5 @@
-
 <div *ngIf="pet" class="container mt-4 d-flex justify-content-center">
+  <div class="row pet-details-card">
     <div class="row pet-details-card">
       <div class="col-md-4">
         <img [src]="'http://localhost:8081' + pet.imagePath" class="img-fluid custom-img" alt="Pet Image"><br><br>
@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-
+<!-- Previous Link -->
   <!-- Previous Link -->
   <div class="text-center mt-3">
     <a class="btn btn-primary" (click)="goToPreviousPage()">Previous</a>

@@ -3,6 +3,8 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PostService } from '../service/post.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
+
 
 
 @Component({
@@ -15,12 +17,12 @@ import { CommonModule } from '@angular/common';
 export class AdminPostDetailComponent implements OnInit {
   logout() {
     localStorage.removeItem('authToken');
-    this.router.navigate(['/login']);    
+    this.router.navigate(['/login']);
   }
   isCollapsed = false;
 
   toggleSidebar() {
-    this.isCollapsed = !this.isCollapsed; 
+    this.isCollapsed = !this.isCollapsed;
   }
 
   post: any = {};
@@ -93,7 +95,7 @@ export class AdminPostDetailComponent implements OnInit {
   }
 
   getImageUrl(post: any): string {
-    return post && post.imageUrl ? `http://localhost:8081/uploads/${post.imageUrl}` : 'assets/default-image.jpg';
+    return post && post.imageUrl ? `${environment.backend1Url}/uploads/${post.imageUrl}` : 'assets/default-image.jpg';
   }
 
   deletePost(post: any) {

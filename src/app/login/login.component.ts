@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router ,RouterLink} from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginComponent {
   login() {
     console.log('Raw Password:', this.password);
   
-    this.http.post('http://localhost:8081/user/login', {
+    this.http.post(`${environment.backend1Url}/user/login`, {
       email: this.email,
       password: this.password 
     }).subscribe(

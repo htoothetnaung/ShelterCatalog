@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { PetService } from '../../services/pet.service';
 import { HttpClient,withInterceptorsFromDi } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-dog-list',
@@ -20,28 +21,6 @@ export class DogListComponent implements OnInit {
   dogs: any[] = [];
   filters = { breed: '', age: null, size: '', gender: '', color: '' };
 
-  // breeds = [
-  //   'LABRADOR_RETRIEVER', 
-  //   'GERMAN_SHEPHERD',
-  //   'GOLDEN_RETRIEVER',
-  //   'FRENCH_BULLDOG', 
-  //   'POODLE', 
-  //   'BULLDOG', 
-  //   'BEAGLE', 
-  //   'ROTTWEILER', 
-  //   'SIBERIAN_HUSKY', 
-  //   'DACHSHUND',
-  //   'PERSIAN', 
-  //   'MAINE_COON', 
-  //   'SIAMESE', 
-  //   'BENGAL', 
-  //   'RAGDOLL', 
-  //   'SCOTTISH_FOLD', 
-  //   'SPHYNX', 
-  //   'BRITISH_SHORTHAIR', 
-  //   'RUSSIAN_BLUE', 
-  //   'ABYSSINIAN',
-  //   'OTHER']
   sizes = ['SMALL', 'MEDIUM','LARGE'];
   dogColors: string[] = [
     'Black', 'Blue', 'Brown', 'Tan', 'Golden (Yellow)', 'Gray',
@@ -54,7 +33,7 @@ export class DogListComponent implements OnInit {
   }
 
   fetchDogs() {
-    this.http.get<any[]>('http://localhost:8081/getPetsByType?type=DOG').subscribe(data => {
+    this.http.get<any[]>(`${environment.backend1Url}/getPetsByType?type=DOG`).subscribe(data => {
       console.log(data); 
       this.dogs = data;
     });
@@ -68,9 +47,9 @@ export class DogListComponent implements OnInit {
     if (this.filters.gender) queryParams += `&gender=${this.filters.gender}`;
     if (this.filters.color) queryParams += `&color=${this.filters.color}`;
   
-    console.log('Requesting:', `http://localhost:8081/search?${queryParams}`);  
+    console.log('Requesting:', `${environment.backend1Url}/search?${queryParams}`);  
   
-    this.http.get<any[]>(`http://localhost:8081/search?${queryParams}`).subscribe(
+    this.http.get<any[]>(`${environment.backend1Url}/search?${queryParams}`).subscribe(
       data => {
         this.dogs = data;
       },
@@ -81,8 +60,6 @@ export class DogListComponent implements OnInit {
     );
   }
   
-  
-
   viewPetDetails(id: number) {
     this.router.navigate(['/pet', id]);
   }
@@ -90,5 +67,4 @@ export class DogListComponent implements OnInit {
   goToPreviousPage() {
     window.history.back(); 
   }
-  
 }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserPostService } from '../service/user-post.service';
 import { UserService } from '../service/user.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user-profile',
@@ -71,7 +72,7 @@ export class AdminUserProfileComponent {
       );
     }
     getImageUrl(imagePath: string): string {
-      return imagePath ? `http://localhost:8081/${imagePath}` : 'assets/default-post.jpg';
+      return imagePath ? `${environment.backend1Url}/${imagePath}` : 'assets/default-post.jpg';
   }
 
   viewPostDetails(post: any) {

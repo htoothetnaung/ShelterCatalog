@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { PetService } from '../services/pet.service';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
-import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user-catlist',
@@ -20,7 +20,7 @@ export class UserCatlistComponent implements OnInit{
 
   filters: { breed: string; age: number | null; size: string; gender: string; color: string } = {
     breed: '',
-    age: null,  // ✅ Ensure age is explicitly initialized as a number or null
+    age: null,
     size: '',
     gender: '',
     color: ''
@@ -39,7 +39,7 @@ export class UserCatlistComponent implements OnInit{
   }
 
   fetchCats() {
-    this.http.get<any[]>('http://localhost:8081/api/userPosts/getPetsByType?type=CAT').subscribe(data => {
+    this.http.get<any[]>(`${environment.backend1Url}/api/userPosts/getPetsByType?type=CAT`).subscribe(data => {
       this.cats = data;
     });
   }
@@ -53,7 +53,7 @@ export class UserCatlistComponent implements OnInit{
     if (this.filters.gender) queryParams += `&gender=${this.filters.gender}`;
     if (this.filters.color) queryParams += `&color=${this.filters.color}`;
 
-    this.http.get<any[]>(`http://localhost:8081/api/userPosts/search?${queryParams}`).subscribe(data => {
+    this.http.get<any[]>(`${environment.backend1Url}/api/userPosts/search?${queryParams}`).subscribe(data => {
       this.cats = data;
     });
   }
@@ -64,6 +64,6 @@ export class UserCatlistComponent implements OnInit{
   }
 
   goToPreviousPage() {
-    window.history.back(); // Navigate to the previous page
+    window.history.back();
   }
 }

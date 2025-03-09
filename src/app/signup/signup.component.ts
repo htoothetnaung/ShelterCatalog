@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router ,RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -20,7 +21,7 @@ export class SignUpComponent {
   signUp() {
     console.log('Raw Password:', this.password);
   
-    this.http.post('http://localhost:8081/user/register', {
+    this.http.post(`${environment.backend1Url}/user/register`, {
       username: this.username,
       email: this.email,
       password: this.password

@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute,Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-adoption-form',
@@ -39,7 +40,7 @@ export class AdoptionFormComponent implements OnInit {
     if (this.adoptionForm.valid) {
       const formData = { petId: this.petId, ...this.adoptionForm.value };
   
-      this.http.post('http://localhost:8081/api/applicationForm/saveForm', formData).subscribe(
+      this.http.post(`${environment.backend1Url}/api/applicationForm/saveForm`, formData).subscribe(
         response => {
           console.log('Adoption request submitted:', response);
           

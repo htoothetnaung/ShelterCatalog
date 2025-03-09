@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdoptionRequestsService {
-  private baseUrl = 'http://localhost:8081/api/applicationForm';
+  private baseUrl = `${environment.backend1Url}/api/applicationForm`;
 
   constructor(private http: HttpClient) {}
 
